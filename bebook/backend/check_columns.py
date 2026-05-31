@@ -1,0 +1,10 @@
+import psycopg2
+conn = psycopg2.connect(host='localhost', database='bebook', user='postgres', password='12345', port='5432')
+cur = conn.cursor()
+cur.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'books' ORDER BY ordinal_position")
+print('BOOKS:', [r[0] for r in cur.fetchall()])
+cur.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'users' ORDER BY ordinal_position")
+print('USERS:', [r[0] for r in cur.fetchall()])
+cur.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'usermessages' ORDER BY ordinal_position")
+print('USERMESSAGES:', [r[0] for r in cur.fetchall()])
+conn.close()
